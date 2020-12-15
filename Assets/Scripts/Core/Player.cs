@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private float speed = 10;
+
+    public void Move()
+    {
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+
+        transform.position += movement * speed * Time.deltaTime;
+    }
+
+
     void Start()
     {
         Rect rect = new Rect(transform.position, transform.localScale);
@@ -13,10 +24,8 @@ public class Player : MonoBehaviour
         Debug.Log(transform.position.y - transform.localScale.y / 2);
         Debug.Log(transform.position.y + transform.localScale.y / 2);
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        Move();
     }
 }

@@ -9,6 +9,6 @@ public class GreetingConsumer : MonoBehaviour
     private IGreeting greeting;
     void Update()
     {
-        Debug.Log(greeting.Message);
+        //Debug.Log(greeting.Message);
     }
 }
