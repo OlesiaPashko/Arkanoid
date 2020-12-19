@@ -17,6 +17,30 @@ namespace Tests
         }
 
         [Test]
+        public void IsCollisionAndVelocityTest()
+        {
+            Line line1 = new Line { A = 1, B = 0, C = 0, startPoint = new Vector2(0, -1), endPoint = new Vector2(0, 1) };
+            Vector2 velocity = new Vector2(1, 0);
+            Assert.IsTrue(CollisionDetector.IsCollision(line1, velocity));
+        }
+
+        [Test]
+        public void IsCollisionLineAndVelocityTest2()
+        {
+            Line line1 = new Line { A = 1, B = 0, C = 1, startPoint = new Vector2(1, -1), endPoint = new Vector2(1, 1) };
+            Vector2 velocity = new Vector2(1, 1);
+            Assert.IsTrue(CollisionDetector.IsCollision(line1, velocity));
+        }
+
+        [Test]
+        public void IsCollisionLineAndVelocityTest3()
+        {
+            Line line1 = new Line { A = 1, B = 0, C = 1, startPoint = new Vector2(1, -1), endPoint = new Vector2(1, 1) };
+            Vector2 velocity = new Vector2(0, 1);
+            Assert.IsFalse(CollisionDetector.IsCollision(line1, velocity));
+        }
+
+        [Test]
         public void IsCollision2LinesTest2()
         {
             Line line1 = new Line { A = 1, B = 0, C = 0 };
@@ -37,6 +61,7 @@ namespace Tests
             bool isOnLine = CollisionDetector.IsPointOnLine(new Line { A = 1, B = 0, C = 1, startPoint = new Vector2(1,-1), endPoint = new Vector2(1, 1) }, new Vector2(1, 0), 0.001f);
             Assert.IsTrue(isOnLine);
         }
+
 
         [Test]
         public void GetLinesFromRectTest()
@@ -59,7 +84,8 @@ namespace Tests
             Vector2 point1 = new Vector2(0.5f, 0.5f);
             Vector2 point2 = new Vector2(-0.5f, 0.5f);
             Line line = CollisionDetector.GetLineFromPoints(point1, point2);
-            Assert.AreEqual(new Line { A = 0, B = 1, C = 0.5f, startPoint = new Vector2(0.5f,0.5f), endPoint = new Vector2(-0.5f, 0.5f) }, line);
+            Line expected = new Line { A = 0, B = 1, C = 0.5f, startPoint = new Vector2(0.5f, 0.5f), endPoint = new Vector2(-0.5f, 0.5f) };
+            Assert.AreEqual(expected, line);
         }
 
         [Test]
@@ -68,9 +94,19 @@ namespace Tests
             Vector2 point1 = new Vector2(-0.5f, -0.5f);
             Vector2 point2 = new Vector2(-0.5f, 0.5f);
             Line line = CollisionDetector.GetLineFromPoints(point1, point2);
-            Assert.AreEqual(new Line { A = 1, B = 0, C = -0.5f, startPoint = new Vector2(-0.5f, -0.5f), endPoint = new Vector2(-0.5f, 0.5f) }, line);
+            Line expected = new Line { A = 1, B = 0, C = -0.5f, startPoint = new Vector2(-0.5f, -0.5f), endPoint = new Vector2(-0.5f, 0.5f) };
+            Assert.AreEqual(expected, line);
         }
 
+        [Test]
+        public void GetLineFromPointsTest3()
+        {
+            Vector2 point1 = new Vector2(0, 0);
+            Vector2 point2 = new Vector2(1, 1);
+            Line line = CollisionDetector.GetLineFromPoints(point1, point2);
+            Line expected = new Line { A = 1, B = -1, C = 0, startPoint = point1, endPoint = point2 };
+            Assert.AreEqual(expected, line);
+        }
 
         [Test]
         public void LinesCollisionTest()

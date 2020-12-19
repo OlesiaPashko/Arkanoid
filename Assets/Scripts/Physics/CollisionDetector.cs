@@ -1,26 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-   //Ax+By=C
-public struct Line
-{
-    public float A;
-    public float B;
-    public float C;
-    public Vector2 startPoint;
-    public Vector2 endPoint;
-    public override string ToString()
-    {
-        if (B < 0)
-        {
-            return $"Start = {startPoint}; End = {endPoint}; Line - {A}x{B}y={C}";
-        }
-        else
-        {
-            return $"Start = {startPoint}; End = {endPoint}; Line - {A}x+{B}y={C}";
-        }
-    }
-}
 
 public static class CollisionDetector
 {
@@ -39,6 +19,41 @@ public static class CollisionDetector
                 }
             }
         }
+        return false;
+    }
+
+    public static bool IsCollision(Rectangle rect, Vector2 velocity)
+    {
+        Line[] lines = GetLinesFromRectangle(rect);
+        foreach (var line in lines)
+        {
+            if (IsCollision(line, velocity))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool IsCollision(Rectangle rect, Vector2 velocity, Vector2 currentPosition, float radius, out Line collisionLine)
+    {
+        Line[] lines = GetLinesFromRectangle(rect);
+        foreach (var line in lines)
+        {
+            try
+            {
+                if ((GetIntersectPoint(line, velocity) - currentPosition).magnitude <= radius)
+                {
+                    collisionLine = line;
+                    return true;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+        collisionLine = new Line();
         return false;
     }
 
@@ -66,6 +81,25 @@ public static class CollisionDetector
         }
     }
 
+    public static bool IsCollision(Line line1, Vector2 velocity, float epsilon = 0.05f)
+    {
+        try
+        {
+            Vector2 point = GetIntersectPoint(line1, velocity);
+            return IsPointOnLine(line1, point, epsilon);
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static Vector2 GetIntersectPoint(Line line1, Vector2 velocity)
+    {
+        Line line2 = GetLineFromPoints(new Vector2(0, 0), velocity);
+        return GetIntersectPoint(line1, line2);
+    }
+
     public static Vector2 GetIntersectPoint(Line line1, Line line2)
     {
         float delta = line1.A * line2.B - line2.A * line1.B;
@@ -90,12 +124,31 @@ public static class CollisionDetector
     {
         bool isOnLine = Math.Abs(line.A * point.x + line.B * point.y) < Math.Abs(line.C) + epsilon
             && Math.Abs(line.A * point.x + line.B * point.y) > Math.Abs(line.C) - epsilon;
-        float maxX = line.endPoint.x > line.startPoint.x ? line.endPoint.x : line.startPoint.x;
-        float minX = line.endPoint.x < line.startPoint.x ? line.endPoint.x : line.startPoint.x;
-        float maxY = line.endPoint.y > line.startPoint.y ? line.endPoint.y : line.startPoint.y;
-        float minY = line.endPoint.y < line.startPoint.y ? line.endPoint.y : line.startPoint.y;
+        float maxX, minX, maxY, minY;
+        if (line.endPoint.x > line.startPoint.x) 
+        {
+            maxX = line.endPoint.x;
+            minX = line.startPoint.x;
+        }
+        else
+        {
+            maxX = line.startPoint.x;
+            minX = line.endPoint.x;
+        }
+        if(line.endPoint.y > line.startPoint.y)
+        {
+            maxY = line.endPoint.y;
+            minY = line.startPoint.y;
+        }
+        else
+        {
+            maxY = line.startPoint.y;
+            minY = line.endPoint.y;
+        }
         bool isInside = point.x <= maxX && point.x >= minX && point.y <= maxY && point.y >= minY;
         return isOnLine && isInside;
     }
+
+
 
 }
