@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Rectangle
+public class Rectangle
 {
     public Vector2 A;
     public Vector2 B;

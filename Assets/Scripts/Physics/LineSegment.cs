@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Ax+By=C
 public struct LineSegment
 {
     public Vector2 startPoint;
@@ -17,6 +16,7 @@ public struct LineSegment
 
     }
 
+    //Ax+By=C
     public (float, float, float) GetCoefs()
     {
         float A = endPoint.y - startPoint.y;
@@ -86,7 +86,7 @@ public struct LineSegment
         try
         {
             Vector2 point = GetIntersectPoint(line);
-            return IsPointOnLine(point, epsilon) && IsPointOnLine(point, epsilon);
+            return IsPointOnLine(point, epsilon) && line.IsPointOnLine(point, epsilon);
         }
         catch
         {

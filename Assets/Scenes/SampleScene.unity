@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 516783961}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 870268695}
   m_Layer: 0
   m_Name: RightBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 1097357968}
   m_Layer: 0
   m_Name: Cell
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 1651906046}
   m_Layer: 0
   m_Name: LeftBorder
-  m_TagString: Untagged
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -925,12 +925,12 @@ PrefabInstance:
     - target: {fileID: 8797807673006822225, guid: a9892d1a57149ba46b19c2b492c3408e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.21933544
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8797807673006822225, guid: a9892d1a57149ba46b19c2b492c3408e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9756496
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8797807673006822225, guid: a9892d1a57149ba46b19c2b492c3408e,
         type: 3}
@@ -950,7 +950,7 @@ PrefabInstance:
     - target: {fileID: 8797807673006822225, guid: a9892d1a57149ba46b19c2b492c3408e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -25.34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8797807673006822228, guid: a9892d1a57149ba46b19c2b492c3408e,
         type: 3}
@@ -961,6 +961,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8797807673006822228, guid: a9892d1a57149ba46b19c2b492c3408e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9892d1a57149ba46b19c2b492c3408e, type: 3}

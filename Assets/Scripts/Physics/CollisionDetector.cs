@@ -65,7 +65,6 @@ public static class CollisionDetector
             return true;
         }
         var point = segment.GetProjection(circle.position);
-        Debug.DrawLine(point, circle.position);
         if(segment.IsPointOnLine(point, 0.05f) && (point-circle.position).magnitude <= circle.radius)
         {
             return true;

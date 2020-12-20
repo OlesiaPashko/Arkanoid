@@ -43,4 +43,17 @@ public class CollisionManager : MonoBehaviour
         collisionLine = new LineSegment();
         return false;
     }
+
+    public static bool CheckCollisions(Rectangle rectangle)
+    {
+        foreach (var collider in colliders)
+        {
+            if (CollisionDetector.IsCollision(collider.GetRectangle(), rectangle) && collider.gameObject.CompareTag("Border"))
+            {
+                Debug.LogError(collider.gameObject.tag);
+                return true;
+            }
+        }
+        return false;
+    }
 }
