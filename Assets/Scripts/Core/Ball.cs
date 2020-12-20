@@ -13,7 +13,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         radius = 0.25f;
-        velocity = new Vector2(0, 10);
+        velocity = new Vector2(5, 10);
     }
 
     // Update is called once per frame

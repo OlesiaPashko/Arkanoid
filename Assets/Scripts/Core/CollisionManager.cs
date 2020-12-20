@@ -7,11 +7,8 @@ public class CollisionManager : MonoBehaviour
 {
 
     [SerializeField]
-    static List<BoxCollider> colliders;
-    void Start()
-    {
-        SetColliders();
-    }
+    static List<BoxCollider> colliders = new List<BoxCollider>();
+
 
     public static void SetColliders()
     {
@@ -21,7 +18,7 @@ public class CollisionManager : MonoBehaviour
         {
             colliders.Add(obj as BoxCollider);
         }
-        Debug.LogError(objects.Length);
+        Debug.LogError("Length of colliders list = " + objects.Length);
     }
 
     public static bool CheckCollisions(Circle circle, out LineSegment collisionLine)
@@ -30,6 +27,15 @@ public class CollisionManager : MonoBehaviour
         {
             if (CollisionDetector.IsCollision(collider.GetRectangle(), circle, out collisionLine))
             {
+                if (collider.gameObject.CompareTag("Goal"))
+                {
+                    colliders.Remove(collider);
+                    Field.Instance.RemoveGoal(collider);
+                }
+                else if (collider.gameObject.CompareTag("Floor"))
+                {
+                   // GameManager.Instance.Lose();
+                }
                 return true;
             }
         }
