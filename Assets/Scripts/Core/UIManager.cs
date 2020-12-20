@@ -36,4 +36,10 @@ public class UIManager : MonoBehaviour
     {
         winPanel.SetActive(true);
     }
+
+    public void CloseWindows()
+    {
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
+    }
 }

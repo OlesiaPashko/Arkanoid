@@ -9,7 +9,6 @@ public class CollisionManager : MonoBehaviour
     [SerializeField]
     static List<BoxCollider> colliders = new List<BoxCollider>();
 
-
     public static void SetColliders()
     {
         Object[] objects = Resources.FindObjectsOfTypeAll(typeof(BoxCollider));
@@ -18,7 +17,6 @@ public class CollisionManager : MonoBehaviour
         {
             colliders.Add(obj as BoxCollider);
         }
-        Debug.LogError("Length of colliders list = " + objects.Length);
     }
 
     public static bool CheckCollisions(Circle circle, out LineSegment collisionLine)
@@ -34,7 +32,7 @@ public class CollisionManager : MonoBehaviour
                 }
                 else if (collider.gameObject.CompareTag("Floor"))
                 {
-                   // GameManager.Instance.Lose();
+                    GameManager.Instance.Lose();
                 }
                 return true;
             }

@@ -36,10 +36,15 @@ public class Field : MonoBehaviour
     }
     void Start()
     {
+        SpawnGoals();
+    }
+
+    public void SpawnGoals()
+    {
         Vector2 pointToSpawn = startPoint;
-        for(int i = 0; i < rowsCount; i++)
+        for (int i = 0; i < rowsCount; i++)
         {
-            for(int j = 0; j< columnsCount; j++)
+            for (int j = 0; j < columnsCount; j++)
             {
                 BoxCollider spawnedGoal = Instantiate(goal, pointToSpawn, Quaternion.identity);
                 pointToSpawn += new Vector2(2, 0);
@@ -50,13 +55,22 @@ public class Field : MonoBehaviour
         }
     }
 
+    public void RespawnGoals()
+    {
+        foreach(var goal in goals)
+        {
+            Destroy(goal.gameObject);
+        }
+        goals = new List<BoxCollider>();
+        SpawnGoals();
+    }
+
     public void RemoveGoal(BoxCollider goal)
     {
         goals.Remove(goal);
         Destroy(goal.gameObject);
         if (goals.Count == 0)
             GameManager.Instance.Win();
-        Debug.LogError("Goals count = " + goals.Count);
     }
 
 }

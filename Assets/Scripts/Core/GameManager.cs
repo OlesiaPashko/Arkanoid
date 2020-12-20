@@ -37,4 +37,13 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.ShowWin();
         Time.timeScale = 0;
     }
+
+    public void PlayAgain()
+    {
+        UIManager.Instance.CloseWindows();
+        Time.timeScale = 1;
+        Field.Instance.RespawnGoals();
+        Ball.Instance.SetStartValues();
+        Platform.Instance.MoveToStartPosition();
+    }
 }
