@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Force
 {
-    public static Vector2 SpecularReflection(Vector2 velocity, Line line)
+    public static Vector2 SpecularReflection(Vector2 velocity, LineSegment line)
     {
         /*if(CollisionDetector.IsCollision(line, velocity))
         {

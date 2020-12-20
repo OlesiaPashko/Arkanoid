@@ -22,6 +22,7 @@ public class CollisionManager : MonoBehaviour
         {
             colliders.Add(obj as BoxCollider);
         }
+        Debug.LogError(objects.Length);
     }
 
     [MenuItem("Example/Hierarchy Window Changed")]
@@ -30,17 +31,16 @@ public class CollisionManager : MonoBehaviour
         EditorApplication.hierarchyWindowChanged += SetColliders;
     }
 
-    public static bool CheckCollisions(Circle circle, out Line collisionLine)
+    public static bool CheckCollisions(Circle circle, out LineSegment collisionLine)
     {
         foreach (var collider in colliders)
         {
-            if (CollisionDetector.IsCollision(collider.GetRectangle(),
-                circle.velocity, new Vector2(circle.transform.position.x, circle.transform.position.y), circle.radius, out collisionLine))
+            if (CollisionDetector.IsCollision(collider.GetRectangle(), circle, out collisionLine))
             {
                 return true;
             }
         }
-        collisionLine = new Line();
+        collisionLine = new LineSegment();
         return false;
     }
 }
