@@ -22,5 +22,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        //Rectangle rect = transform.ToRectangle();
+        //Debug.LogError($"A = {rect.A}, B = {rect.B}, C = {rect.C}, D = {rect.D} ");
     }
 }

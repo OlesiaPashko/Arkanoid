@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Border : MonoBehaviour
+public class Box : MonoBehaviour
 {
     void Start()
     {
-        
+        transform.ToRectangle();
     }
 
     // Update is called once per frame
