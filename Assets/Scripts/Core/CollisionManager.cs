@@ -6,7 +6,6 @@ using UnityEngine;
 public class CollisionManager : MonoBehaviour
 {
 
-
     [SerializeField]
     static List<BoxCollider> colliders;
     void Start()
@@ -14,7 +13,7 @@ public class CollisionManager : MonoBehaviour
         SetColliders();
     }
 
-    private static void SetColliders()
+    public static void SetColliders()
     {
         Object[] objects = Resources.FindObjectsOfTypeAll(typeof(BoxCollider));
         colliders = new List<BoxCollider>();
@@ -23,12 +22,6 @@ public class CollisionManager : MonoBehaviour
             colliders.Add(obj as BoxCollider);
         }
         Debug.LogError(objects.Length);
-    }
-
-    [MenuItem("Example/Hierarchy Window Changed")]
-    static void Example()
-    {
-        EditorApplication.hierarchyWindowChanged += SetColliders;
     }
 
     public static bool CheckCollisions(Circle circle, out LineSegment collisionLine)
@@ -50,7 +43,6 @@ public class CollisionManager : MonoBehaviour
         {
             if (CollisionDetector.IsCollision(collider.GetRectangle(), rectangle) && collider.gameObject.CompareTag("Border"))
             {
-                Debug.LogError(collider.gameObject.tag);
                 return true;
             }
         }
