@@ -33,29 +33,28 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var positionBefore = transform.position;
-        var deltaPosition = velocity * Time.deltaTime;
-        transform.position += new Vector3(deltaPosition.x, deltaPosition.y);
+        var previousPosition = Move();
 
-        
         LineSegment collisionLine;
         if (collisionManager.CheckCollisions(ToCircle(), out collisionLine))
         {
-            transform.position = positionBefore;
+            transform.position = previousPosition;
             velocity = Force.SpecularReflection(velocity, collisionLine);
         }
     }
 
-    public (Vector2, Vector2) GetTangentsStarts()
+    private Vector2 Move()
     {
-        Vector2 perpendicular = Vector2.Perpendicular(velocity);
-        var deltaPosition = radius * perpendicular.normalized;
-        return (transform.position - (Vector3)deltaPosition, transform.position + (Vector3)deltaPosition);
+        var previousPosition = transform.position;
+        var deltaPosition = velocity * Time.deltaTime;
+        transform.position += new Vector3(deltaPosition.x, deltaPosition.y);
+        return previousPosition;
     }
+
 
     private Circle ToCircle()
     {
-        return new Circle() { radius = radius, position = transform.position };
+        return new Circle(radius, transform.position);
     }
 
 }

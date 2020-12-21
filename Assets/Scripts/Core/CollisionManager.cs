@@ -34,6 +34,9 @@ public class CollisionManager : MonoBehaviour
         SpawnGoals();
     }
 
+    /// <summary>
+    /// get all objects of type BoxCollider and store it
+    /// </summary>
     public static void SetColliders()
     {
         Object[] objects = Resources.FindObjectsOfTypeAll(typeof(BoxCollider));
@@ -78,7 +81,7 @@ public class CollisionManager : MonoBehaviour
     {
         foreach (var collider in colliders)
         {
-            if (CollisionDetector.IsCollision(collider?.GetRectangle(), rectangle) && collider.gameObject.CompareTag("Border"))
+            if (CollisionDetector.IsCollision(collider.GetRectangle(), rectangle) && collider.gameObject.CompareTag("Border"))
             {
                 return true;
             }
@@ -86,7 +89,9 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-
+    /// <summary>
+    /// Spawnes matrix of goals
+    /// </summary>
     public void SpawnGoals()
     {
         Vector2 pointToSpawn = startPoint;
@@ -103,6 +108,9 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys existing goals and spawn goals matrix again
+    /// </summary>
     public void RespawnGoals()
     {
         for(int i = 0; i < spawnedGoals.Count; i++)

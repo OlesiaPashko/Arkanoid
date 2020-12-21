@@ -16,7 +16,11 @@ public struct LineSegment
 
     }
 
-    //Ax+By=C
+
+    /// <summary>
+    /// Get Ax+By=C line coefs (A, B, C) 
+    /// </summary>
+    /// <returns></returns>
     public (float, float, float) GetCoefs()
     {
         float A = endPoint.y - startPoint.y;

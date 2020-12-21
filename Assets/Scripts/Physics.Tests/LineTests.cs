@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -10,7 +11,7 @@ namespace Tests
     {
 
         [Test]
-        public void IsCollision2LinesTest()
+        public void IsCollision_ParallelLines_Negative()
         {
             LineSegment line1 = new LineSegment(new Vector2(0, -5), new Vector2(0, 5));
             LineSegment line2 = new LineSegment(new Vector2(1, -5), new Vector2(1, 5));
@@ -19,7 +20,7 @@ namespace Tests
 
 
         [Test]
-        public void IsCollision2LinesTest2()
+        public void IsCollision_Positive()
         {
             LineSegment line1 = new LineSegment(new Vector2(0, -5), new Vector2(0, 5));
             LineSegment line2 = new LineSegment(new Vector2(-5, 0), new Vector2(5, 0));
@@ -28,7 +29,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsPointOnLineTest()
+        public void IsPointOnLine_Negative()
         {
             LineSegment line = new LineSegment(new Vector2(1, -5), new Vector2(1, 5));
             bool isOnLine =line.IsPointOnLine(new Vector2(0, 0), 0.00001f);
@@ -36,7 +37,7 @@ namespace Tests
         }
 
         [Test]
-        public void IsPointOnLineTest2()
+        public void IsPointOnLine_Positive()
         {
             LineSegment line = new LineSegment(new Vector2(1, -5), new Vector2(1, 5));
             bool isOnLine = line.IsPointOnLine(new Vector2(1, 0), 0.001f);
@@ -44,7 +45,7 @@ namespace Tests
         }
 
         [Test]
-        public void GetCoefsFromLineTest()
+        public void GetCoefsFromLine()
         {
             Vector2 point1 = new Vector2(0.5f, 0.5f);
             Vector2 point2 = new Vector2(-0.5f, 0.5f);
@@ -83,7 +84,7 @@ namespace Tests
         }
 
         [Test]
-        public void LinesCollisionTest()
+        public void GetIntersectPoint_Positive()
         {
             LineSegment line1 = new LineSegment(new Vector2(-5, 1), new Vector2(5, 1));
             LineSegment line2 = new LineSegment(new Vector2(1, -5), new Vector2(1, 5));
@@ -94,14 +95,11 @@ namespace Tests
         }
 
         [Test]
-        public void LinesCollisionTest2()
+        public void GetIntersectPoint_Negative()
         {
-            LineSegment line1 = new LineSegment(new Vector2(-2, 0), new Vector2(0, -2));
-            LineSegment line2 = new LineSegment(new Vector2(-2, -2), new Vector2(0, 0));
-            Vector2 point = line1.GetIntersectPoint(line2);
-            Vector2 desirablePoint = new Vector2(-1, -1);
-            float epsilon = 0.0001f;
-            Assert.That(Vector3.Distance(point, desirablePoint) < epsilon);
+            LineSegment line1 = new LineSegment(new Vector2(-2, 0), new Vector2(2, 0));
+            LineSegment line2 = new LineSegment(new Vector2(-4, 0), new Vector2(4, 0));
+            Assert.Throws<ArgumentException>(() => line1.GetIntersectPoint(line2));
         }
 
     }

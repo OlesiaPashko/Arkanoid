@@ -13,7 +13,7 @@ namespace Tests
         public void IsCollisionLineAndCircle_Negative()
         {
             LineSegment line1 = new LineSegment(new Vector2(1, -1), new Vector2(1, 1));
-            Circle circle = new Circle() { radius = 0.5f, position = new Vector2(-1, 0) };
+            Circle circle = new Circle(0.5f, new Vector2(-1, 0));
             Assert.IsFalse(CollisionDetector.IsCollision(line1, circle));
         }
 
@@ -21,7 +21,7 @@ namespace Tests
         public void IsCollisionLineAndCircle_Positive()
         {
             LineSegment line1 = new LineSegment(new Vector2(1, -1), new Vector2(1, 1));
-            Circle circle = new Circle() { radius = 0.5f, position = new Vector2(0.5f, 0) };
+            Circle circle = new Circle(0.5f, new Vector2(0.5f, 0));
             Assert.IsTrue(CollisionDetector.IsCollision(line1, circle));
         }
 
@@ -53,7 +53,7 @@ namespace Tests
         }
 
         [Test]
-        public void RotatedRectsCollisionTest()
+        public void RotatedRectsCollision_Positive()
         {
             Rectangle rect1 = new Rectangle() { A = new Vector2(-1, 0), B = new Vector2(0, 1), C = new Vector2(1, 0), D = new Vector2(0, -1) };
             Rectangle rect2 = new Rectangle() { A = new Vector2(0, 0), B = new Vector2(0, 1), C = new Vector2(1, 1), D = new Vector2(1, 0) };
@@ -62,7 +62,7 @@ namespace Tests
         }
 
         [Test]
-        public void RotatedRectsCollisionTest2()
+        public void RotatedRectsCollision_PositiveOverlap2()
         {
             Rectangle rect1 = new Rectangle() { A = new Vector2(-1, 0), B = new Vector2(0, 1), C = new Vector2(1, 0), D = new Vector2(0, -1) };
             Rectangle rect2 = new Rectangle() { A = new Vector2(-2, 1), B = new Vector2(-1, 2), C = new Vector2(0, 1), D = new Vector2(-1, 0) };
@@ -71,7 +71,7 @@ namespace Tests
         }
 
         [Test]
-        public void RotatedRectsCollisionTest3()
+        public void RotatedRectsCollision_Negative()
         {
             Rectangle rect1 = new Rectangle() { A = new Vector2(-1, 0), B = new Vector2(0, 1), C = new Vector2(1, 0), D = new Vector2(0, -1) };
             Rectangle rect2 = new Rectangle() { A = new Vector2(-1.5f, 1.5f), B = new Vector2(-1, 2), C = new Vector2(-0.5f, 1.5f), D = new Vector2(-1, 1) };

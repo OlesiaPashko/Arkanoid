@@ -44,13 +44,18 @@ public static class CollisionDetector
 
     public static bool IsCollision(LineSegment segment, Circle circle)
     {
+        //check distances to sergent endpoins
         float distanceToEndPoint = (circle.position - segment.endPoint).magnitude;
         float distanceToStartPoint = (circle.position - segment.startPoint).magnitude;
         if(distanceToEndPoint < circle.radius || distanceToStartPoint < circle.radius)
         {
             return true;
         }
+
+        //get circle position point projection on line segment
         var point = segment.GetProjection(circle.position);
+
+        //check is projection point on line and distance to line < circle radius
         if(segment.IsPointOnLine(point, 0.05f) && (point-circle.position).magnitude <= circle.radius)
         {
             return true;
