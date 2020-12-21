@@ -1,24 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Ball : MonoBehaviour
 {
-    private static Ball _instance;
-
-    public static Ball Instance { get { return _instance; } }
-
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
 
     [SerializeField]
     public Vector2 velocity;
@@ -28,6 +14,9 @@ public class Ball : MonoBehaviour
 
     [SerializeField]
     Vector2 startPosition;
+
+    [Inject]
+    private CollisionManager collisionManager;
 
     void Start()
     {
@@ -50,25 +39,8 @@ public class Ball : MonoBehaviour
 
         
         LineSegment collisionLine;
-        if (CollisionManager.CheckCollisions(ToCircle(), out collisionLine))
+        if (collisionManager.CheckCollisions(ToCircle(), out collisionLine))
         {
-            /*var (leftTangentStart, rightTangentStart) = GetTangentsStarts();
-            var leftTargentSegment = new LineSegment(leftTangentStart, leftTangentStart + deltaPosition);
-            var rightTargentSegment = new LineSegment(rightTangentStart, rightTangentStart + deltaPosition);
-            List<Vector2> intersectionPoints = new List<Vector2>();
-            try
-            {
-                intersectionPoints.Add(leftTargentSegment.GetIntersectPoint(collisionLine));
-            }
-            catch { }
-            try
-            {
-                intersectionPoints.Add(rightTargentSegment.GetIntersectPoint(collisionLine));
-            }
-            catch { }
-            var minDistance = intersectionPoints[0]-;
-            var minTargetSegment = new LineAS()
-            var intersectionPoint = deltaPositionLine.GetIntersectPoint(collisionLine);*/
             transform.position = positionBefore;
             velocity = Force.SpecularReflection(velocity, collisionLine);
         }

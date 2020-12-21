@@ -8,10 +8,4 @@ public class Box : MonoBehaviour
     {
         transform.ToRectangle();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

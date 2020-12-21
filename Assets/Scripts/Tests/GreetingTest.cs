@@ -9,12 +9,12 @@ namespace Tests
     public class GreetingTest
     {
         // A Test behaves as an ordinary method
-        [Test]
+        /*[Test]
         public void GreetingTestSimplePasses()
         {
             IGreeting gr = new Greeting();
             Assert.That(gr.Message == "Hello world");
-        }
+        }*/
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.

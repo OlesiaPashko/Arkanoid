@@ -1,49 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
+    [Inject]
+    private Ball ball;
 
-    public static GameManager Instance { get { return _instance; } }
+    [Inject]
+    private Platform platform;
 
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Inject]
+    private Field field;
 
-    // Update is called once per frame
+    [Inject]
+    private UIManager UIManager;
     public void Lose()
     {
-        UIManager.Instance.ShowLose();
+        UIManager.ShowLose();
         Time.timeScale = 0;
     }
 
     public void Win()
     {
-        UIManager.Instance.ShowWin();
+        UIManager.ShowWin();
         Time.timeScale = 0;
     }
 
     public void PlayAgain()
     {
-        UIManager.Instance.CloseWindows();
+        UIManager.CloseWindows();
         Time.timeScale = 1;
-        Field.Instance.RespawnGoals();
-        Ball.Instance.SetStartValues();
-        Platform.Instance.MoveToStartPosition();
+        field.RespawnGoals();
+        ball.SetStartValues();
+        platform.MoveToStartPosition();
     }
 }

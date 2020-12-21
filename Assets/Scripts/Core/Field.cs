@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Field : MonoBehaviour
 {
@@ -16,24 +17,12 @@ public class Field : MonoBehaviour
     [SerializeField]
     private int columnsCount;
 
+    [Inject]
+    private GameManager gameManager;
+
     
     private List<BoxCollider> goals = new List<BoxCollider>();
 
-    private static Field _instance;
-
-    public static Field Instance { get { return _instance; } }
-
-    private void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
     void Start()
     {
         SpawnGoals();
@@ -70,7 +59,7 @@ public class Field : MonoBehaviour
         goals.Remove(goal);
         Destroy(goal.gameObject);
         if (goals.Count == 0)
-            GameManager.Instance.Win();
+            gameManager.Win();
     }
 
 }

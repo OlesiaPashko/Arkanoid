@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 public class CollisionManager : MonoBehaviour
 {
 
     [SerializeField]
     static List<BoxCollider> colliders = new List<BoxCollider>();
+
+    [Inject]
+    private GameManager gameManager;
+
+    [Inject]
+    private Field field;
 
     public static void SetColliders()
     {
@@ -19,7 +26,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
-    public static bool CheckCollisions(Circle circle, out LineSegment collisionLine)
+    public bool CheckCollisions(Circle circle, out LineSegment collisionLine)
     {
         foreach (var collider in colliders)
         {
@@ -28,11 +35,11 @@ public class CollisionManager : MonoBehaviour
                 if (collider.gameObject.CompareTag("Goal"))
                 {
                     colliders.Remove(collider);
-                    Field.Instance.RemoveGoal(collider);
+                    field.RemoveGoal(collider);
                 }
                 else if (collider.gameObject.CompareTag("Floor"))
                 {
-                    GameManager.Instance.Lose();
+                    gameManager.Lose();
                 }
                 return true;
             }
@@ -41,7 +48,7 @@ public class CollisionManager : MonoBehaviour
         return false;
     }
 
-    public static bool CheckCollisions(Rectangle rectangle)
+    public bool CheckCollisions(Rectangle rectangle)
     {
         foreach (var collider in colliders)
         {
