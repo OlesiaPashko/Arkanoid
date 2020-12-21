@@ -10,4 +10,4 @@ There are
 
 ![Screenshot1](https://github.com/OlesiaPashko/Arkanoid/blob/main/Screenshots/Screenshot1.png)
 ![Screenshot2](https://github.com/OlesiaPashko/Arkanoid/blob/main/Screenshots/Screenshot2.png)
-![Screenshot3](https://github.com/OlesiaPashko/Arkanoid/blob/main/Screenshots/Screenshot3.png)
+![Screenshot3](https://github.com/OlesiaPashko/Arkanoid/blob/main/Screenshots/Screenshots.png)
