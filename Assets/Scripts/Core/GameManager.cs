@@ -12,10 +12,10 @@ public class GameManager : MonoBehaviour
     private Platform platform;
 
     [Inject]
-    private Field field;
+    private UIManager UIManager;
 
     [Inject]
-    private UIManager UIManager;
+    private CollisionManager collisionManager;
     public void Lose()
     {
         UIManager.ShowLose();
@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     {
         UIManager.CloseWindows();
         Time.timeScale = 1;
-        field.RespawnGoals();
         ball.SetStartValues();
         platform.MoveToStartPosition();
+        collisionManager.RespawnGoals();
     }
 }

@@ -10,6 +10,5 @@ public class DependeciesInstaller : MonoInstaller
         Container.Bind<UIManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<CollisionManager>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<Field>().FromComponentInHierarchy().AsSingle();
     }
 }

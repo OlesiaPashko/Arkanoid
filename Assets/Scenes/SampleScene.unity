@@ -227,6 +227,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dadb2fdd2761a14289d4a6a366140f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPoint: {x: -5, y: 2}
+  gap: 1
+  rowsCount: 3
+  columnsCount: 10
+  goal: {fileID: 230878956858342898, guid: 70ca439de07b37b4db3c3b75bd6f1b38, type: 3}
 --- !u!4 &42882956
 Transform:
   m_ObjectHideFlags: 0
