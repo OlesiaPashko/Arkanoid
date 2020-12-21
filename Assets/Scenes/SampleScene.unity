@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dadb2fdd2761a14289d4a6a366140f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPoint: {x: -5, y: 2}
+  startPoint: {x: -5, y: 0}
   gap: 2
   rowsCount: 3
   columnsCount: 6
