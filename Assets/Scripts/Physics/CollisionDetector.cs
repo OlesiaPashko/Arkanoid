@@ -4,11 +4,10 @@ using UnityEngine;
 
 public static class CollisionDetector
 {
-
-    public static bool IsCollision(Rectangle firstObject, Rectangle secondObject)
+    public static bool IsCollision(Rectangle firstRectangle, Rectangle secondRectangle)
     {
-        LineSegment[] linesRect1 = GetLinesFromRectangle(firstObject);
-        LineSegment[] linesRect2 = GetLinesFromRectangle(secondObject);
+        LineSegment[] linesRect1 = firstRectangle.GetLines();
+        LineSegment[] linesRect2 = secondRectangle.GetLines();
         foreach(var lineRect1 in linesRect1)
         {
             foreach(var lineRect2 in linesRect2)
@@ -24,7 +23,7 @@ public static class CollisionDetector
 
     public static bool IsCollision(Rectangle rect, Circle circle, out LineSegment collisionLine)
     {
-        LineSegment[] segments = GetLinesFromRectangle(rect);
+        LineSegment[] segments = rect.GetLines();
         foreach (var segment in segments)
         {
             try
@@ -36,23 +35,10 @@ public static class CollisionDetector
                 }
             }
             catch
-            {
-
-            }
+            { }
         }
         collisionLine = new LineSegment();
         return false;
-    }
-    
-    public static LineSegment[] GetLinesFromRectangle(Rectangle rect)
-    {
-        return new LineSegment[] 
-        {
-            new LineSegment(rect.A, rect.B),
-            new LineSegment(rect.A, rect.D),
-            new LineSegment(rect.C, rect.B),
-            new LineSegment(rect.C, rect.D) 
-        };
     }
 
 
